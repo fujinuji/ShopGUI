@@ -1,0 +1,6 @@
+name: ShopPlus
+main: me.fujinuji.ShopPlus.ShopPlus
+version: 1.0.3
+commands: 
+     shop:
+      descrition: Open the shop
