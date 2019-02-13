@@ -36,7 +36,7 @@ public class ShopPlus extends JavaPlugin{
     private Statement connectionStatement;
     private DatabaseConnection databaseConnection;
 
-    @Override
+    
 	public void onEnable() {
 		getServer().getPluginManager().registerEvents(new MainMenuListener(), this);
 		getServer().getPluginManager().registerEvents(new ShopMenuListener(), this);
