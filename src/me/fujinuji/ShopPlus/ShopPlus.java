@@ -1,6 +1,9 @@
 package me.fujinuji.ShopPlus;
 
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.PrintWriter;
+import java.io.UnsupportedEncodingException;
 import java.lang.reflect.Method;
 import java.net.URL;
 import java.net.URLClassLoader;
@@ -9,9 +12,14 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.logging.Level;
 
+import com.mysql.fabric.xmlrpc.base.Array;
+import jdk.nashorn.internal.runtime.arrays.ArrayLikeIterator;
 import me.fujinuji.ShopPlus.Database.DatabaseConnection;
+import me.fujinuji.ShopPlus.Domain.ShopItem;
 import me.fujinuji.ShopPlus.Listeners.SignGUI;
+import me.fujinuji.ShopPlus.Updater.DataController;
 import me.fujinuji.ShopPlus.Utils.Enums.XMaterial;
 import me.fujinuji.ShopPlus.Domain.Category;
 import me.fujinuji.ShopPlus.Domain.Item;
@@ -45,7 +53,25 @@ public class ShopPlus extends JavaPlugin{
         getItems(null);
         signGui = new SignGUI(this);
         databaseConnection = new DatabaseConnection("fujinuji", "parola");
+        PrintWriter writer = null;
+        try {
+            writer = new PrintWriter("items.csv", "UTF-8");
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+            Material.
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
 
+        for (Material material : Material.values()) {
+            System.out.println(material.name());
+            writer.write(material.name() + ", , \n");
+        }
+        writer.close();
+        DataController col = new DataController();
+        ArrayList<ShopItem> shopData = col.loadShopItems();
+
+        Bukkit.getLogger().log(Level.INFO, "Array: " + shopData.size());
         try {
             databaseConnection.connect();
         } catch (Exception e) {
@@ -73,6 +99,9 @@ public class ShopPlus extends JavaPlugin{
                     System.out.println(lines[0]);
                 }
             });*/
+
+
+
             try {
                 this.appendToDatabase("fujinuji", args[0]);
             } catch (Exception ex) {
@@ -127,7 +156,6 @@ public class ShopPlus extends JavaPlugin{
 
 	public void createConnection() throws Exception{
         final String dir = System.getProperty("user.dir");
-        getServer().getConsoleSender().sendMessage(dir);
         File driver = new File(dir + "\\plugins\\ShopPlus\\h2.jar");
         getServer().getConsoleSender().sendMessage(driver.toString());
         this.loadExternalDriver(driver);

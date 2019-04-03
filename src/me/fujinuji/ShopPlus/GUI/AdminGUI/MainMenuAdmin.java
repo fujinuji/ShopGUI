@@ -27,7 +27,7 @@ public class MainMenuAdmin{
 		shopItem.setItemMeta(shopItemMeta);
 		
 		/// PRICE MANAGER ITEM
-		Item priceManagerItem = new Item(Material.REDSTONE_COMPARATOR);
+		Item priceManagerItem = new Item(Material.COMPARATOR);
 		ItemMeta priceManagerItemMeta = priceManagerItem.getItemStack().getItemMeta();
 		
 		itemLore.clear();

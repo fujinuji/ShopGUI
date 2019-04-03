@@ -19,7 +19,7 @@ public class DatabaseConnection {
     private String username;
     private String password;
 
-    protected Connection connection;
+    protected static Connection connection;
 
     public DatabaseConnection(String username, String password) {
         this.username = username;
@@ -35,7 +35,7 @@ public class DatabaseConnection {
         Bukkit.getLogger().log(Level.INFO, "Connected to database");
     }
 
-    private static void setUpDriver() {
+    private void setUpDriver() {
         String homeDirectory = System.getProperty("user.dir");
         File driverFile = new File(homeDirectory + "\\plugins\\ShopPlus\\Database\\h2.jar");
 
@@ -64,7 +64,7 @@ public class DatabaseConnection {
         method.invoke(ClassLoader.getSystemClassLoader(), new Object[]{file.toURI().toURL()});
     }
 
-    private static void downloadH2() {
+    private void downloadH2() {
 
         final String link = "http://repo2.maven.org/maven2/com/h2database/h2/1.4.197/h2-1.4.197.jar";
         final String databasePath = "./plugins/ShopPlus/Database/h2.jar";
@@ -81,7 +81,7 @@ public class DatabaseConnection {
         }
     }
 
-    private static boolean netIsAvailable() {
+    private boolean netIsAvailable() {
         try {
             final URL url = new URL("http://www.google.com");
             final URLConnection conn = url.openConnection();
@@ -92,4 +92,6 @@ public class DatabaseConnection {
             return false;
         }
     }
+
+
 }

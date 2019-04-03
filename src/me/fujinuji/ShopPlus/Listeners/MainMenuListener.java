@@ -35,7 +35,7 @@ public class MainMenuListener implements Listener{
 			navigator.openPlayerShopNavigation((Player) event.getWhoClicked());
 		}
 		
-		if (event.getCurrentItem().getType().equals(Material.REDSTONE_COMPARATOR)) {
+		if (event.getCurrentItem().getType().equals(Material.COMPARATOR)) {
 			
 		}
 		
